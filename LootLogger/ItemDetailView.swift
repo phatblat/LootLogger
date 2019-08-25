@@ -9,13 +9,25 @@
 import SwiftUI
 
 struct ItemDetailView: View {
+    let item: Item
+
     var body: some View {
-        VStack {
-            FormField(title: "Name", placeholder: "", value: .constant("Item Name"))
-            FormField(title: "Name", placeholder: "", value: .constant("Serial"))
-            FormField(title: "Name", placeholder: "", value: .constant("Value"))
+        Form {
+            Section(header: Text("Information")) {
+                HStack {
+                    Text("ID")
+                        .foregroundColor(.gray)
+                    Spacer()
+                    Text("\(item.id)")
+                        .lineLimit(1)
+                        .font(.subheadline)
+                }
+            }
+            FormField(title: "Name", placeholder: "", value: .constant(item.name))
+            FormField(title: "Serial", placeholder: "", value: .constant(item.serial))
+            FormField(title: "Value", placeholder: "", value: .constant(item.itemValue))
         }
-        .padding()
+        .navigationBarTitle("Item Detail")
     }
 }
 
@@ -27,13 +39,16 @@ struct FormField: View {
     var body: some View {
         HStack {
             Text(title)
+                .foregroundColor(.gray)
             TextField("placeholder", text: $value)
+//                .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .multilineTextAlignment(.trailing)
         }
     }
 }
 
 struct ItemDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemDetailView()
+        ItemDetailView(item: Item.random)
     }
 }
