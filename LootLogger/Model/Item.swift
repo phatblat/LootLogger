@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Item {
+struct Item: Identifiable, Equatable, Hashable {
     var name = ""
     var serial = ""
     var itemValue = ""
@@ -33,4 +33,12 @@ class Item {
         let value = "0"
         return Item(name: name, serial: serial, itemValue: value)
     }
+
+    // Equatable
+//    static func == (lhs: Item, rhs: Item) -> Bool {
+//        return lhs.name == rhs.name &&
+//            lhs.serial == rhs.serial &&
+//            lhs.itemValue == rhs.itemValue &&
+//            lhs.id == rhs.id
+//    }
 }
