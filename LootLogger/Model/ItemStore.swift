@@ -25,7 +25,11 @@ class ItemStore: ObservableObject {
             let items = try decoder.decode([Item].self, from: data)
             self.items = items
         } catch {
-            print("error: \(error)")
+            print("Initializing ItemStore")
+            (0..<5).forEach { _ in
+                items.append(Item.random)
+            }
+            save()
         }
     }
 
